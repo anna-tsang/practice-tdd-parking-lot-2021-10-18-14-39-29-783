@@ -14,10 +14,12 @@ public class ParkingBoy {
     }
 
     public Ticket park(Car car) {
-        return parkingLotList.stream().filter(parkingLot -> parkingLot.getAvailablePosition() > 0)
-                .findFirst()
-                .get()
-                .park(car);
+        for(ParkingLot parkingLot: parkingLotList){
+            if (!parkingLot.isParkingLotFull()){
+                parkingLot.park(car);
+            }
+        }
+        throw new NoAvailablePositionException(NO_AVAILABLE_POSITION);
     }
 
     public Car fetch(Ticket ticket) {

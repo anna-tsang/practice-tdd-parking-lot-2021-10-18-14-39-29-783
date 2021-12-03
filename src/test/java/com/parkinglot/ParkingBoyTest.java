@@ -109,20 +109,38 @@ public class ParkingBoyTest {
         ParkingLot parkingLotA = new ParkingLot();
         ParkingLot parkingLotB = new ParkingLot();
         Car carA = new Car();
-        Car carB = new Car();
         Ticket ticketA = parkingLotA.park(carA);
-        Ticket ticketB = parkingLotB.park(carB);
         List<ParkingLot> parkingLotList = Arrays.asList(parkingLotA,parkingLotB);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
 
-        Car resultOfCarA = parkingBoy.fetch(ticketA);
+        parkingBoy.fetch(ticketA);
 
         //when
         UnrecognisedParkingTicket unrecognisedParkingTicket = assertThrows(UnrecognisedParkingTicket.class, () -> {
-            Car fetchCar = parkingBoy.fetch(ticketA);
+            parkingBoy.fetch(ticketA);
         });
 
         //then
         assertEquals(UNRECOGNISED_PARKING_TICKET, unrecognisedParkingTicket.getMessage());
+    }
+
+    //case 7
+    @Test
+    void should_return_error_message_when_park_car_given_no_available_parking_position() {
+        //given
+        ParkingLot parkingLotA = new ParkingLot(0);
+        ParkingLot parkingLotB = new ParkingLot(0);
+        Car carA = new Car();
+        List<ParkingLot> parkingLotList = Arrays.asList(parkingLotA,parkingLotB);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+
+        //when
+        NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
+            parkingBoy.park(carA);
+        });
+
+        //then
+        assertEquals(NO_AVAILABLE_POSITION, noAvailablePositionException.getMessage());
+
     }
 }
