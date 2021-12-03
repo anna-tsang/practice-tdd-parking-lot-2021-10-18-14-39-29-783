@@ -52,4 +52,27 @@ public class ParkingBoyTest {
         assertEquals(0, parkingLotA.getAvailablePosition());
         assertEquals(9, parkingLotB.getAvailablePosition());
     }
+
+    //case 4
+    @Test
+    void should_return_right_car_with_each_ticket_when_fetch_car_twice_given_both_with_parked_car_and_2_parking_ticket() {
+        //given
+        ParkingLot parkingLotA = new ParkingLot();
+        ParkingLot parkingLotB = new ParkingLot();
+        Car carA = new Car();
+        Car carB = new Car();
+        Ticket ticketA = parkingLotA.park(carA);
+        Ticket ticketB = parkingLotB.park(carB);
+        List<ParkingLot> parkingLotList = Arrays.asList(parkingLotA,parkingLotB);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+
+        //when
+        Car resultOfCarA = parkingBoy.fetch(ticketA);
+        Car resultOfCarB = parkingBoy.fetch(ticketB);
+
+        //then
+        assertEquals(carA, resultOfCarA);
+        assertEquals(carB, resultOfCarB);
+
+    }
 }

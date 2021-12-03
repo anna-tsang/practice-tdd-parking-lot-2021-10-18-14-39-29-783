@@ -1,5 +1,6 @@
 package com.parkinglot;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,5 +16,12 @@ public class ParkingBoy {
                 .findFirst()
                 .get()
                 .park(car);
+    }
+
+    public Car fetch(Ticket ticket) {
+        for(ParkingLot parkingLot: parkingLotList){
+            return parkingLot.fetch(ticket);
+        }
+        return null;
     }
 }
