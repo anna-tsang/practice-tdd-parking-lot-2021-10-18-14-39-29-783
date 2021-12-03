@@ -8,8 +8,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParkingBoyTest {
+    private final String UNRECOGNISED_PARKING_TICKET = "Unrecognised parking ticket.";
+    private final String NO_AVAILABLE_POSITION = "No available position.";
+
     @Test
     void should_return_ticket_when_park_car_given_standard_parking_boy_manage_one_parking_lot_and_car() {
         //given
@@ -73,6 +77,29 @@ public class ParkingBoyTest {
         //then
         assertEquals(carA, resultOfCarA);
         assertEquals(carB, resultOfCarB);
+    }
+
+    //case 5
+    @Test
+    void should_return_error_message_when_fetch_car_given_unrecognised_ticket() {
+        //given
+        ParkingLot parkingLotA = new ParkingLot();
+        ParkingLot parkingLotB = new ParkingLot();
+        Car carA = new Car();
+        Car carB = new Car();
+        Ticket ticketA = parkingLotA.park(carA);
+        Ticket ticketB = parkingLotB.park(carB);
+        Ticket wrongTicket = new Ticket();
+        List<ParkingLot> parkingLotList = Arrays.asList(parkingLotA,parkingLotB);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+
+        //when
+        UnrecognisedParkingTicket unrecognisedParkingTicket = assertThrows(UnrecognisedParkingTicket.class, () -> {
+            Car fetchCar = parkingBoy.fetch(wrongTicket);
+        });
+
+        //then
+        assertEquals(UNRECOGNISED_PARKING_TICKET, unrecognisedParkingTicket.getMessage());
 
     }
 }
