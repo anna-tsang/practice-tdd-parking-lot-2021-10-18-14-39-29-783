@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParkingLotTest {
+    private final String UNRECOGNISED_PARKING_TICKET = "Unrecognised parking ticket.";
+    private final String NO_AVAILABLE_POSITION = "No available position.";
+
     @Test
     void should_return_ticket_when_park_car_given_parking_lot_and_car() {
         //given
@@ -30,7 +33,7 @@ public class ParkingLotTest {
         NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
             parkingLot.park(carB);
         });
-        assertEquals("No available position.", noAvailablePositionException.getMessage());
+        assertEquals(NO_AVAILABLE_POSITION, noAvailablePositionException.getMessage());
     }
 
     @Test
@@ -77,7 +80,7 @@ public class ParkingLotTest {
             Car fetchCar = parkingLot.fetch(wrongTicket);
         });
         //then
-        assertEquals("Unrecognised parking ticket.", unrecognisedParkingTicket.getMessage());
+        assertEquals(UNRECOGNISED_PARKING_TICKET, unrecognisedParkingTicket.getMessage());
 
     }
 
@@ -93,7 +96,7 @@ public class ParkingLotTest {
             Car fetchCar = parkingLot.fetch(ticketA);
         });
         //then
-        assertEquals("Unrecognised parking ticket.", unrecognisedParkingTicket.getMessage());
+        assertEquals(UNRECOGNISED_PARKING_TICKET, unrecognisedParkingTicket.getMessage());
     }
 
     @Test

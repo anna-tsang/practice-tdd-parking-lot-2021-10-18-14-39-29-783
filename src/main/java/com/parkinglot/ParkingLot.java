@@ -6,6 +6,8 @@ public class ParkingLot {
     private final int DEFAULT_CAPACITY = 10;
     private final int capacity;
     HashMap<Ticket,Car> ticketCarMap = new HashMap<>();
+    private final String UNRECOGNISED_PARKING_TICKET = "Unrecognised parking ticket.";
+    private final String NO_AVAILABLE_POSITION = "No available position.";
 
     public ParkingLot(){
         capacity = DEFAULT_CAPACITY;
@@ -20,7 +22,7 @@ public class ParkingLot {
             ticketCarMap.put(ticket,car);
             return ticket;
         }
-        throw new NoAvailablePositionException("No available position.");
+        throw new NoAvailablePositionException(NO_AVAILABLE_POSITION);
     }
 
     private boolean isParkingLotFull(){
@@ -33,6 +35,6 @@ public class ParkingLot {
             ticketCarMap.remove(ticket);
             return car;
         }
-        throw new UnrecognisedParkingTicket("Unrecognised parking ticket.");
+        throw new UnrecognisedParkingTicket(UNRECOGNISED_PARKING_TICKET);
     }
 }
