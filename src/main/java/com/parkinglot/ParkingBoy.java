@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ParkingBoy {
-    private List<ParkingLot> parkingLotList;
+    public List<ParkingLot> parkingLotList;
     private final String UNRECOGNISED_PARKING_TICKET = "Unrecognised parking ticket.";
     private final String NO_AVAILABLE_POSITION = "No available position.";
 
