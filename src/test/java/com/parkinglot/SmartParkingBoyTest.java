@@ -45,4 +45,26 @@ public class SmartParkingBoyTest {
         assertTrue(parkingLotB.ticketCarMap.containsValue(car));
         assertFalse(parkingLotA.ticketCarMap.containsValue(car));
     }
+
+    //case3
+    @Test
+    void should_return_right_car_with_each_ticket_when_fetch_car_given_2_parking_lots_with_2_parked_car_and_2_tickets() {
+        //given
+        ParkingLot parkingLotA = new ParkingLot();
+        ParkingLot parkingLotB = new ParkingLot();
+        Car carA = new Car();
+        Car carB = new Car();
+        Ticket ticketA = parkingLotA.park(carA);
+        Ticket ticketB = parkingLotB.park(carB);
+        List<ParkingLot> parkingLotList = Arrays.asList(parkingLotA,parkingLotB);
+        SmartParkingBoy parkingBoy = new SmartParkingBoy(parkingLotList);
+
+        //when
+        Car resultOfCarA = parkingBoy.fetch(ticketA);
+        Car resultOfCarB = parkingBoy.fetch(ticketB);
+
+        //then
+        assertEquals(carA, resultOfCarA);
+        assertEquals(carB, resultOfCarB);
+    }
 }
