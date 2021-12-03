@@ -33,6 +33,6 @@ public class ParkingLot {
             ticketCarMap.remove(ticket);
             return car;
         }
-        throw new NoAvailablePositionException("Unrecognised parking ticket.");
+        throw new UnrecognisedParkingTicket("Unrecognised parking ticket.");
     }
 }
