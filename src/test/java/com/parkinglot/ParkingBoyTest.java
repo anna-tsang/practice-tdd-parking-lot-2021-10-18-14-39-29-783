@@ -100,6 +100,29 @@ public class ParkingBoyTest {
 
         //then
         assertEquals(UNRECOGNISED_PARKING_TICKET, unrecognisedParkingTicket.getMessage());
+    }
 
+    //case 6
+    @Test
+    void should_return_error_message_when_fetch_car_given_used_ticket() {
+        //given
+        ParkingLot parkingLotA = new ParkingLot();
+        ParkingLot parkingLotB = new ParkingLot();
+        Car carA = new Car();
+        Car carB = new Car();
+        Ticket ticketA = parkingLotA.park(carA);
+        Ticket ticketB = parkingLotB.park(carB);
+        List<ParkingLot> parkingLotList = Arrays.asList(parkingLotA,parkingLotB);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+
+        Car resultOfCarA = parkingBoy.fetch(ticketA);
+
+        //when
+        UnrecognisedParkingTicket unrecognisedParkingTicket = assertThrows(UnrecognisedParkingTicket.class, () -> {
+            Car fetchCar = parkingBoy.fetch(ticketA);
+        });
+
+        //then
+        assertEquals(UNRECOGNISED_PARKING_TICKET, unrecognisedParkingTicket.getMessage());
     }
 }
