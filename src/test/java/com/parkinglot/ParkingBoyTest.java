@@ -42,8 +42,8 @@ public class ParkingBoyTest {
     @Test
     void should_return_second_parking_lot_when_park_car_given_first_parking_lot_full_second_with_available_position() {
         //given
-        ParkingLot parkingLotA = new ParkingLot();
-        ParkingLot parkingLotB = new ParkingLot();
+        ParkingLot parkingLotA = new ParkingLot(0);
+        ParkingLot parkingLotB = new ParkingLot(10);
         List<ParkingLot> parkingLotList = Arrays.asList(parkingLotA,parkingLotB);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
         //when

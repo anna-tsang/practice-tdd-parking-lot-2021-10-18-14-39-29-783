@@ -25,7 +25,7 @@ public class ParkingLot {
         throw new NoAvailablePositionException(NO_AVAILABLE_POSITION);
     }
 
-    private boolean isParkingLotFull(){
+    public boolean isParkingLotFull(){
         return ticketCarMap.size() >= capacity;
     }
 
@@ -39,6 +39,6 @@ public class ParkingLot {
     }
 
     public int getAvailablePosition() {
-        return capacity;
+        return capacity - ticketCarMap.size();
     }
 }
