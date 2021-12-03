@@ -10,7 +10,9 @@ public class ParkingBoy {
     }
 
     public Ticket park(Car car) {
-        return parkingLotList.stream().filter(parkingLot -> parkingLot.getAvailablePosition())
-                park(car);
+        return parkingLotList.stream().filter(parkingLot -> parkingLot.getAvailablePosition() > 0)
+                .findFirst()
+                .get()
+                .park(car);
     }
 }
