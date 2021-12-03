@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParkingLotTest {
     @Test
@@ -88,5 +89,19 @@ public class ParkingLotTest {
 
         //then
         assertNull(fetchCar);
+    }
+
+    @Test
+    void should_throw_no_available_position_when_park_car_given_parking_lot_without_position_and_car() {
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.park(new Car());
+        Car car = new Car();
+        //when
+
+        assertThrows(NoAvailablePositionException.class, () -> {
+            parkingLot.park(car);
+        });
+        //then
     }
 }
