@@ -21,13 +21,16 @@ public class ParkingLotTest {
 
     @Test
     void should_return_nothing_when_park_car_given_full_parking_lot_and_car() {
-        //given
-        ParkingLot parkingLot = new ParkingLot(0);
-        Car car = new Car();
-        //when
-        Ticket ticket = parkingLot.park(car);
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car carA = new Car();
+        parkingLot.park(carA);
+        Car carB = new Car();
+
         //then
-        assertNull(ticket);
+        NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
+            parkingLot.park(carB);
+        });
+        assertEquals("No available position.", noAvailablePositionException.getMessage());
     }
 
     @Test
@@ -70,10 +73,12 @@ public class ParkingLotTest {
         Ticket wrongTicket = new Ticket();
 
         //when
-        Car fetchCar = parkingLot.fetch(wrongTicket);
-
+        NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
+            Car fetchCar = parkingLot.fetch(wrongTicket);
+        });
         //then
-        assertNull(fetchCar);
+        assertEquals("Unrecognised parking ticket.", noAvailablePositionException.getMessage());
+
     }
 
     @Test
@@ -84,23 +89,24 @@ public class ParkingLotTest {
         Ticket ticketA = parkingLot.park(carA);
         Car fetchCarA = parkingLot.fetch(ticketA);
 
-        //when
-        Car fetchCar = parkingLot.fetch(ticketA);
-
+        NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
+            Car fetchCar = parkingLot.fetch(ticketA);
+        });
         //then
-        assertNull(fetchCar);
+        assertEquals("Unrecognised parking ticket.", noAvailablePositionException.getMessage());
     }
 
     @Test
     void should_throw_no_available_position_when_park_car_given_parking_lot_without_position_and_car() {
         //given
-        ParkingLot parkingLot = new ParkingLot();
-        parkingLot.park(new Car());
-        Car car = new Car();
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car carA = new Car();
+        parkingLot.park(carA);
+        Car carB = new Car();
         //when
 
-        NoAvailablePositionException noAvailablePositionException =  assertThrows(NoAvailablePositionException.class, () -> {
-            parkingLot.park(car);
+        NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
+            parkingLot.park(carB);
         });
         //then
         assertEquals("No available position.", noAvailablePositionException.getMessage());

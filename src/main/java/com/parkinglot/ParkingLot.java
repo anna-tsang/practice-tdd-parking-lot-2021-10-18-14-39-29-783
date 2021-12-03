@@ -20,7 +20,7 @@ public class ParkingLot {
             ticketCarMap.put(ticket,car);
             return ticket;
         }
-        return null;
+        throw new NoAvailablePositionException("No available position.");
     }
 
     private boolean isParkingLotFull(){
@@ -33,6 +33,6 @@ public class ParkingLot {
             ticketCarMap.remove(ticket);
             return car;
         }
-        return null;
+        throw new NoAvailablePositionException("Unrecognised parking ticket.");
     }
 }
