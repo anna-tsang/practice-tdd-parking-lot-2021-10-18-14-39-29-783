@@ -99,9 +99,10 @@ public class ParkingLotTest {
         Car car = new Car();
         //when
 
-        assertThrows(NoAvailablePositionException.class, () -> {
+        NoAvailablePositionException noAvailablePositionException =  assertThrows(NoAvailablePositionException.class, () -> {
             parkingLot.park(car);
         });
         //then
+        assertEquals("No available position.", noAvailablePositionException.getMessage());
     }
 }
