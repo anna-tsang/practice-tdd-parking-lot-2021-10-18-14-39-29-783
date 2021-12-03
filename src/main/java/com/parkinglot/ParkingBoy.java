@@ -20,7 +20,9 @@ public class ParkingBoy {
 
     public Car fetch(Ticket ticket) {
         for(ParkingLot parkingLot: parkingLotList){
-            return parkingLot.fetch(ticket);
+            try {
+                return parkingLot.fetch(ticket);
+            } catch (RuntimeException ignored) {}
         }
         return null;
     }
