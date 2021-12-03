@@ -37,4 +37,8 @@ public class ParkingLot {
         }
         throw new UnrecognisedParkingTicket(UNRECOGNISED_PARKING_TICKET);
     }
+
+    public int getAvailablePosition() {
+        return capacity;
+    }
 }

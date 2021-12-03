@@ -2,6 +2,10 @@ package com.parkinglot;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ParkingBoyTest {
@@ -15,5 +19,22 @@ public class ParkingBoyTest {
 
         //then
         assertNotNull(ticket);
+    }
+    //case 2
+    @Test
+    void should_return_first_parking_lot_when_park_car_given_2_parking_lot_with_available_position() {
+        //given
+        ParkingLot parkingLotA = new ParkingLot();
+        ParkingLot parkingLotB = new ParkingLot();
+        List<ParkingLot> parkingLotList = new ArrayList<ParkingLot>() {{
+            parkingLotA, parkingLotB
+        }};
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        //when
+        Ticket ticket = parkingBoy.park(new Car());
+
+        //then
+        assertEquals(9, parkingLotA.getAvailablePosition());
+        assertEquals(10, parkingLotB.getAvailablePosition());
     }
 }
