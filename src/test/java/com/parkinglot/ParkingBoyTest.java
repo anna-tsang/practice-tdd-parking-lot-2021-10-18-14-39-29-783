@@ -37,4 +37,19 @@ public class ParkingBoyTest {
         assertEquals(9, parkingLotA.getAvailablePosition());
         assertEquals(10, parkingLotB.getAvailablePosition());
     }
+
+    //case 3
+    @Test
+    void should_return_second_parking_lot_when_park_car_given_first_parking_lot_full_second_with_available_position() {
+        //given
+        ParkingLot parkingLotA = new ParkingLot();
+        ParkingLot parkingLotB = new ParkingLot();
+        List<ParkingLot> parkingLotList = Arrays.asList(parkingLotA,parkingLotB);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        //when
+        Ticket ticket = parkingBoy.park(new Car());
+        //then
+        assertEquals(0, parkingLotA.getAvailablePosition());
+        assertEquals(9, parkingLotB.getAvailablePosition());
+    }
 }
