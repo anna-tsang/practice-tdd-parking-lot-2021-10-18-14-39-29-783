@@ -14,10 +14,10 @@ public class ParkingBoy {
     }
 
     public Ticket park(Car car) {
-        for(ParkingLot parkingLot: parkingLotList){
-            if (!parkingLot.isParkingLotFull()){
-                parkingLot.park(car);
-            }
+        for (ParkingLot parkingLot : parkingLotList) {
+            if (!parkingLot.isParkingLotFull())
+                return parkingLot.park(car);
+
         }
         throw new NoAvailablePositionException(NO_AVAILABLE_POSITION);
     }
