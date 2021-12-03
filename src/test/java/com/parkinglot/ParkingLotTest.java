@@ -39,7 +39,6 @@ public class ParkingLotTest {
         //when
         Car result = parkingLot.fetch(ticket);
 
-
         //then
         assertEquals(car,result);
     }
